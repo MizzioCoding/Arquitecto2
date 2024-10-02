@@ -4,13 +4,18 @@ import { GoChevronDown } from "react-icons/go";
 import "../src/index.css";
 import { useInView } from "react-intersection-observer";
 
+// Importar las imágenes directamente
+import img1 from '../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp';
+import img2 from '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp';
+
 const Gallery = () => {
   const navigate = useNavigate();
   const [visibleCount, setVisibleCount] = useState(6);
 
+  // Usa las imágenes importadas en lugar de las rutas relativas
   const images = [
-    { src: "../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp", text: "CONCURSO Urbano Imagina Bolivar" },
-    { src: "../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp", text: "CONCURSO Urbano Imagina Bolivar" },
+    { src: img1, text: "CONCURSO Urbano Imagina Bolivar" },
+    { src: img2, text: "CONCURSO Urbano Imagina Bolivar" },
   ];
 
   const handleLoadMore = () => {
