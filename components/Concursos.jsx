@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Carrousel from './Carrousel'; // Asegúrate de importar el componente Carrousel
+import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el componente SkeletonCarrousel
 import "../src/index.css";
 
 const Concursos = () => {
@@ -88,8 +89,11 @@ const Concursos = () => {
         Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
           <div key={index}>
             {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
-            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+            {/* Mostrar el skeleton mientras se cargan las imágenes */}
+            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 ? (
               <Carrousel images={imagenesPorCarpeta[carpeta]} />
+            ) : (
+              <SkeletonCarrousel /> // Mostrar el skeleton si no hay imágenes cargadas aún
             )}
           </div>
         ))
