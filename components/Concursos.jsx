@@ -7,6 +7,7 @@ const Concursos = () => {
   const [imagenesPorCarpeta, setImagenesPorCarpeta] = useState({});
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const importarImagenes = async () => {
@@ -50,6 +51,7 @@ const Concursos = () => {
         }
 
         setImagenesPorCarpeta(carpetas);
+        setIsLoading(false); // Cambiar el estado de carga a false una vez que las imágenes hayan terminado de cargar
       } catch (error) {
         console.error("Error al cargar las imágenes:", error);
       }
@@ -73,15 +75,23 @@ const Concursos = () => {
         </div>
       )}
 
-      {/* Mostrar las imágenes por carpeta */}
-      {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-        <div key={index}>
-          {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
-          {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
-            <Carrousel images={imagenesPorCarpeta[carpeta]} />
-          )}
+      {/* Mostrar el skeleton mientras las imágenes están cargando */}
+      {isLoading ? (
+        <div className="skeleton">
+          <p>Cargando...</p>
+          {/* Aquí puedes agregar más elementos de skeleton según tus necesidades */}
         </div>
-      ))}
+      ) : (
+        /* Mostrar las imágenes por carpeta */
+        Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+          <div key={index}>
+            {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
+            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+              <Carrousel images={imagenesPorCarpeta[carpeta]} />
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
