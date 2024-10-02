@@ -76,7 +76,7 @@ const Concursos = () => {
       {/* Mostrar las imágenes por carpeta */}
       {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
         <div key={index}>
-          <h2>{carpeta}</h2>
+          {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
           {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
             <Carrousel images={imagenesPorCarpeta[carpeta]} />
           )}
