@@ -14,8 +14,8 @@ const Gallery = () => {
 
   // Usa las imágenes importadas en lugar de las rutas relativas
   const images = [
-    { src: img1, text: "CONCURSO Urbano Imagina Bolivar" },
-    { src: img2, text: "CONCURSO Urbano Imagina Bolivar" },
+    { src: img1, srctxt: '../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp', text: "CONCURSO Urbano Imagina Bolivar" },
+    { src: img2, srctxt: '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp', text: "CONCURSO Urbano Imagina Bolivar" },
   ];
 
   const handleLoadMore = () => {
@@ -31,7 +31,7 @@ const Gallery = () => {
             src={image.src}
             alt={`Imagen ${index + 1}`}
             text={image.text}
-            onClick={() => navigate("/concursos/" + image.src.split('/')[4])}
+            onClick={() => navigate("/concursos/" + image.srctxt.split('/')[4])}
           />
         ))}
       </div>
