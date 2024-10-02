@@ -70,7 +70,7 @@ const Concursos = () => {
 
   return (
     <div className="concursos">
-      <h1>{normalizeName(nombreConcurso)}</h1>
+      <h1 className="tituloConcurso">{normalizeName(nombreConcurso)}</h1>
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
         <div className="portada">
