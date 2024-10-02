@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Carrousel from './Carrousel'; // Asegúrate de importar el componente Carrousel
+import "../src/index.css";
 
 const Concursos = () => {
   const { nombreConcurso } = useParams(); // Obtenemos el nombre del concurso desde la URL
