@@ -8,7 +8,7 @@ import { useInView } from "react-intersection-observer";
 import img1 from '../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp';
 import img2 from '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp';
 import portadaCosta from "../src/assets/Concursos/Concurso_Costa_Urbana/1.webp";
-import portadaHawa from "../src/assets/Concursos/Concurso_Hawa/1.webp";
+import portadaHawa from "../src/assets/Concursos/Concurso_HAWA/1.webp";
 import portadaSumInta from "../src/assets/Concursos/Concurso_Sum_Inta/1.webp";
 import portadaSantaFe from "../src/assets/Viviendas/Santa_Fe/1.webp";
 import portadaAlberti from "../src/assets/Viviendas/Alberti/1.webp";
