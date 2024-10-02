@@ -79,8 +79,9 @@ const Concursos = () => {
       {/* Mostrar el skeleton mientras las imágenes están cargando */}
       {isLoading ? (
         <div className="skeleton">
-          <p>Cargando...</p>
-          {/* Aquí puedes agregar más elementos de skeleton según tus necesidades */}
+          <div className="skeleton-header"></div>
+          <div className="skeleton-body"></div>
+          <div className="skeleton-footer"></div>
         </div>
       ) : (
         /* Mostrar las imágenes por carpeta */
