@@ -10,6 +10,7 @@ const Concursos = () => {
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [carpetasCargadas, setCarpetasCargadas] = useState({}); // Estado para seguir el progreso de cada carpeta
 
   useEffect(() => {
     const importarImagenes = async () => {
@@ -20,6 +21,18 @@ const Concursos = () => {
         );
 
         const carpetas = {};
+        const carpetasProgreso = {};
+
+        // Inicializamos el estado de carga para cada carpeta
+        Object.keys(archivos).forEach(ruta => {
+          const partesRuta = ruta.split("/");
+          const nombreCarpeta = partesRuta[5]; // Ajustar según la estructura real del path
+          if (nombreCarpeta && !carpetasProgreso[nombreCarpeta]) {
+            carpetasProgreso[nombreCarpeta] = true; // Se inicia la carga para esa carpeta
+          }
+        });
+
+        setCarpetasCargadas(carpetasProgreso); // Establecer el estado inicial de carga
 
         // Procesamos las rutas obtenidas y las filtramos por el concurso
         for (const ruta in archivos) {
@@ -53,7 +66,15 @@ const Concursos = () => {
         }
 
         setImagenesPorCarpeta(carpetas);
-        setIsLoading(false); // Cambiar el estado de carga a false una vez que las imágenes hayan terminado de cargar
+
+        // Actualizamos el estado de carga para cada carpeta una vez que están listas
+        const carpetasCargadasActualizadas = { ...carpetasProgreso };
+        Object.keys(carpetas).forEach(carpeta => {
+          carpetasCargadasActualizadas[carpeta] = false; // La carpeta ha terminado de cargar
+        });
+
+        setCarpetasCargadas(carpetasCargadasActualizadas);
+        setIsLoading(false); // Cambiar el estado de carga global a false
       } catch (error) {
         console.error("Error al cargar las imágenes:", error);
       }
@@ -77,27 +98,21 @@ const Concursos = () => {
         </div>
       )}
 
-      {/* Mostrar el skeleton mientras las imágenes están cargando */}
-      {isLoading ? (
-        <div className="skeleton">
-          <div className="skeleton-header"></div>
-          <div className="skeleton-body"></div>
-          <div className="skeleton-footer"></div>
-        </div>
-      ) : (
-        /* Mostrar las imágenes por carpeta */
-        Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-          <div key={index}>
-            {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
-            {/* Mostrar el skeleton mientras se cargan las imágenes */}
-            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 ? (
+      {/* Mostrar las imágenes por carpeta */}
+      {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+        <div key={index}>
+          {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
+
+          {/* Mostrar el SkeletonCarrousel si las imágenes de la carpeta aún están cargando */}
+          {carpetasCargadas[carpeta] ? (
+            <SkeletonCarrousel />
+          ) : (
+            imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
               <Carrousel images={imagenesPorCarpeta[carpeta]} />
-            ) : (
-              <SkeletonCarrousel /> // Mostrar el skeleton si no hay imágenes cargadas aún
-            )}
-          </div>
-        ))
-      )}
+            )
+          )}
+        </div>
+      ))}
     </div>
   );
 };
