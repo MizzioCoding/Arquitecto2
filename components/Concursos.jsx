@@ -90,6 +90,7 @@ const Concursos = () => {
   return (
     <div className="concursos">
       <h1>{normalizeName(nombreConcurso)}</h1>
+
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
         <div className="portada">
@@ -98,10 +99,22 @@ const Concursos = () => {
         </div>
       )}
 
+      {/* Mostrar el skeleton global mientras todo está cargando */}
+      {isLoading && (
+        <div className="skeleton">
+          <div className="skeleton-header"></div>
+          <div className="skeleton-body"></div>
+          <div className="skeleton-footer"></div>
+        </div>
+      )}
+
       {/* Mostrar las imágenes por carpeta */}
       {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
         <div key={index}>
           {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
+
+          {/* Verificamos el estado de carga de cada carpeta */}
+          {console.log("Estado de carga de la carpeta", carpeta, carpetasCargadas[carpeta])}
 
           {/* Mostrar el SkeletonCarrousel si las imágenes de la carpeta aún están cargando */}
           {carpetasCargadas[carpeta] ? (
