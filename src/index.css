@@ -572,7 +572,7 @@ button[type="submit"]:hover {
 
 .skeleton-image {
     width: 100%; /* Se puede ajustar según sea necesario */
-    height: 300px; /* Altura del skeleton, ajustar según tu diseño */
+    height: 400px; /* Altura del skeleton, ajustar según tu diseño */
     background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
     background-size: 200% 100%;
     animation: loading 1.5s infinite;
@@ -588,6 +588,8 @@ button[type="submit"]:hover {
     margin: 0 5px; /* Espacio entre miniaturas */
     border-radius: 5px;
   }
+
+  
 
   @keyframes loading {
     0% {
