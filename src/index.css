@@ -570,30 +570,31 @@ button[type="submit"]:hover {
     color: rgb(90, 90, 90);
 }
 
-.skeleton-carrousel {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.skeleton-image {
+    width: 100%; /* Se puede ajustar según sea necesario */
+    height: 300px; /* Altura del skeleton, ajustar según tu diseño */
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    border-radius: 14px;
   }
   
-  .skeleton-slide {
-    width: 300px;
-    height: 200px;
-    background-color: #e0e0e0;
-    border-radius: 10px;
-    margin: 0 10px;
-    animation: pulse 1.5s infinite ease-in-out;
+  .skeleton-thumbnail {
+    width: 80px; /* Ajusta el tamaño según sea necesario */
+    height: 60px; /* Ajusta el tamaño según sea necesario */
+    background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+    background-size: 200% 100%;
+    animation: loading 1.5s infinite;
+    margin: 0 5px; /* Espacio entre miniaturas */
+    border-radius: 5px;
   }
-  
-  @keyframes pulse {
+
+  @keyframes loading {
     0% {
-      background-color: #e0e0e0;
-    }
-    50% {
-      background-color: #f0f0f0;
+      background-position: 200% 0;
     }
     100% {
-      background-color: #e0e0e0;
+      background-position: -200% 0;
     }
   }
   
