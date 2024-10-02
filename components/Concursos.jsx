@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Carrousel from './Carrousel'; // Asegúrate de importar el componente Carrousel
-import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el componente SkeletonCarrousel
+import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el SkeletonCarrousel
 import "../src/index.css";
 
 const Concursos = () => {
@@ -10,7 +10,6 @@ const Concursos = () => {
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [carpetasCargadas, setCarpetasCargadas] = useState({}); // Estado para seguir el progreso de cada carpeta
 
   useEffect(() => {
     const importarImagenes = async () => {
@@ -21,18 +20,6 @@ const Concursos = () => {
         );
 
         const carpetas = {};
-        const carpetasProgreso = {};
-
-        // Inicializamos el estado de carga para cada carpeta
-        Object.keys(archivos).forEach(ruta => {
-          const partesRuta = ruta.split("/");
-          const nombreCarpeta = partesRuta[5]; // Ajustar según la estructura real del path
-          if (nombreCarpeta && !carpetasProgreso[nombreCarpeta]) {
-            carpetasProgreso[nombreCarpeta] = true; // Se inicia la carga para esa carpeta
-          }
-        });
-
-        setCarpetasCargadas(carpetasProgreso); // Establecer el estado inicial de carga
 
         // Procesamos las rutas obtenidas y las filtramos por el concurso
         for (const ruta in archivos) {
@@ -40,7 +27,8 @@ const Concursos = () => {
           if (ruta.includes(nombreConcurso)) {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5]; // Ajusta según la estructura real del path
-            const fileName = partesRuta[5]; // Ajusta según la estructura real del path
+            
+            const fileName = partesRuta[5]; // Obtener el nombre del archivo
 
             const filePath = await archivos[ruta](); // Resolvemos la imagen o archivo
 
@@ -66,17 +54,10 @@ const Concursos = () => {
         }
 
         setImagenesPorCarpeta(carpetas);
-
-        // Actualizamos el estado de carga para cada carpeta una vez que están listas
-        const carpetasCargadasActualizadas = { ...carpetasProgreso };
-        Object.keys(carpetas).forEach(carpeta => {
-          carpetasCargadasActualizadas[carpeta] = false; // La carpeta ha terminado de cargar
-        });
-
-        setCarpetasCargadas(carpetasCargadasActualizadas);
-        setIsLoading(false); // Cambiar el estado de carga global a false
       } catch (error) {
         console.error("Error al cargar las imágenes:", error);
+      } finally {
+        setIsLoading(false); // Cambiar el estado de carga a false después de procesar
       }
     };
 
@@ -90,7 +71,6 @@ const Concursos = () => {
   return (
     <div className="concursos">
       <h1>{normalizeName(nombreConcurso)}</h1>
-
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
         <div className="portada">
@@ -99,33 +79,20 @@ const Concursos = () => {
         </div>
       )}
 
-      {/* Mostrar el skeleton global mientras todo está cargando */}
-      {isLoading && (
-        <div className="skeleton">
-          <div className="skeleton-header"></div>
-          <div className="skeleton-body"></div>
-          <div className="skeleton-footer"></div>
-        </div>
-      )}
-
-      {/* Mostrar las imágenes por carpeta */}
-      {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-        <div key={index}>
-          {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
-
-          {/* Verificamos el estado de carga de cada carpeta */}
-          {console.log("Estado de carga de la carpeta", carpeta, carpetasCargadas[carpeta])}
-
-          {/* Mostrar el SkeletonCarrousel si las imágenes de la carpeta aún están cargando */}
-          {carpetasCargadas[carpeta] ? (
-            <SkeletonCarrousel />
-          ) : (
-            imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+      {/* Mostrar el SkeletonCarrousel mientras las imágenes están cargando */}
+      {isLoading ? (
+        <SkeletonCarrousel /> 
+      ) : (
+        /* Mostrar las imágenes por carpeta */
+        Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+          <div key={index}>
+            {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
+            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
               <Carrousel images={imagenesPorCarpeta[carpeta]} />
-            )
-          )}
-        </div>
-      ))}
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
