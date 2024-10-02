@@ -17,7 +17,7 @@ const Projects = ({ titulo }) => {
 
   useEffect(() => {
     const getSubfolders = async () => {
-      const context = import.meta.glob("../src/assets/**/RENDERS/*");
+      const context = import.meta.glob("../src/assets/**/Renders/*");
       console.log("Rutas encontradas con glob:", Object.keys(context));
       
       const subfoldersSet = new Set();
@@ -26,7 +26,7 @@ const Projects = ({ titulo }) => {
         console.log("Partes de la ruta:", parts);
         const folderIndex = parts.indexOf(titulo);  // Asegúrate de que `titulo` sea exactamente igual a la subcarpeta
         console.log(`Buscando la carpeta ${titulo} en:`, parts, "Índice:", folderIndex);
-        if (folderIndex !== -1 && parts[folderIndex + 2] === 'RENDERS') {
+        if (folderIndex !== -1 && parts[folderIndex + 2] === 'Renders') {
           subfoldersSet.add(parts[folderIndex + 1]);
         }
       }
@@ -35,13 +35,13 @@ const Projects = ({ titulo }) => {
     };
 
     const getImagePaths = async (subcarpeta) => {
-      const context = import.meta.glob("../src/assets/**/RENDERS/*");
+      const context = import.meta.glob("../src/assets/**/Renders/*");
       const imagePaths = [];
 
       for (const key of Object.keys(context)) {
         const parts = key.split('/');
         const folderIndex = parts.indexOf(titulo);
-        if (folderIndex !== -1 && parts[folderIndex + 1] === subcarpeta && parts[folderIndex + 2] === 'RENDERS') {
+        if (folderIndex !== -1 && parts[folderIndex + 1] === subcarpeta && parts[folderIndex + 2] === 'Renders') {
           imagePaths.push(key);
         }
       }
