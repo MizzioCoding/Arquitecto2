@@ -1,90 +1,72 @@
 import React, { useState, useEffect } from "react";
 import Carrousel from "./Carrousel";
+import SkeletonCarrousel from "./SkeletonCarrousel"; // Importar el SkeletonCarrousel
 import { useNavigate } from "react-router-dom";
 import "../src/index.css";
-
-const defaultImages = [
-  "https://via.placeholder.com/300",
-  "https://via.placeholder.com/300",
-  "https://via.placeholder.com/300",
-  "https://via.placeholder.com/300",
-];
 
 const Projects = ({ titulo }) => {
   const [subfolders, setSubfolders] = useState([]);
   const [imagePaths, setImagePaths] = useState({});
+  const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     const getSubfolders = async () => {
-      const context = import.meta.glob("../src/assets/**/Renders/*");
-      console.log("Rutas encontradas con glob:", Object.keys(context));
-      
-      const subfoldersSet = new Set();
-      for (const key of Object.keys(context)) {
-        const parts = key.split('/');
-        console.log("Partes de la ruta:", parts);
-        const folderIndex = parts.indexOf(titulo);  // Asegúrate de que `titulo` sea exactamente igual a la subcarpeta
-        console.log(`Buscando la carpeta ${titulo} en:`, parts, "Índice:", folderIndex);
-        if (folderIndex !== -1 && parts[folderIndex + 2] === 'Renders') {
-          subfoldersSet.add(parts[folderIndex + 1]);
+      try {
+        const context = import.meta.glob("../src/assets/**/Renders/*.{webp,txt}");
+        console.log("Rutas encontradas con glob:", Object.keys(context));
+
+        const subfoldersSet = new Set();
+        const images = {};
+
+        for (const key of Object.keys(context)) {
+          const parts = key.split('/');
+          console.log("Partes de la ruta:", parts);
+          const folderIndex = parts.indexOf(titulo);  // Asegúrate de que `titulo` sea exactamente igual a la subcarpeta
+          console.log(`Buscando la carpeta ${titulo} en:`, parts, "Índice:", folderIndex);
+
+          if (folderIndex !== -1) {
+            const subfolder = parts[folderIndex + 1];
+            subfoldersSet.add(subfolder);
+
+            const filePath = await context[key]();
+            if (!images[subfolder]) {
+              images[subfolder] = [];
+            }
+            images[subfolder].push(filePath.default);
+          }
         }
-      }
 
-      return Array.from(subfoldersSet);
+        setSubfolders(Array.from(subfoldersSet));
+        setImagePaths(images);
+      } catch (error) {
+        console.error("Error al cargar las imágenes:", error);
+      } finally {
+        setIsLoading(false);
+      }
     };
 
-    const getImagePaths = async (subcarpeta) => {
-      const context = import.meta.glob("../src/assets/**/Renders/*");
-      const imagePaths = [];
-
-      for (const key of Object.keys(context)) {
-        const parts = key.split('/');
-        const folderIndex = parts.indexOf(titulo);
-        if (folderIndex !== -1 && parts[folderIndex + 1] === subcarpeta && parts[folderIndex + 2] === 'Renders') {
-          imagePaths.push(key);
-        }
-      }
-
-      return imagePaths;
-    };
-
-    const fetchSubfoldersAndImages = async () => {
-      const subfolders = await getSubfolders();
-      setSubfolders(subfolders);
-
-      const paths = {};
-      for (const subcarpeta of subfolders) {
-        const images = await getImagePaths(subcarpeta);
-        paths[subcarpeta] = images.length > 0 ? images : defaultImages;
-      }
-      setImagePaths(paths);
-    };
-
-    fetchSubfoldersAndImages();
+    getSubfolders();
   }, [titulo]);
-
-  const sanitizeUrl = (text) => {
-    return text.toLowerCase().replace(/\s+/g, '-');
-  };
-
-  const handleImageClick = (text, src) => {
-    const sanitizedUrl = sanitizeUrl(text);
-    const basePath = src.split('/')[3]; // Obtiene la carpeta base (Concursos, Viviendas, etc.)
-    navigate(`/${basePath}/${sanitizedUrl}`, { state: { src } });
-  };
 
   return (
     <div className="projects">
-      {subfolders.map((subcarpeta, index) => (
-        <div key={index} className="project">
-          <h2>{subcarpeta}</h2>
-          <Carrousel images={imagePaths[subcarpeta] || defaultImages} />
-          <button className="verMas" onClick={() => handleImageClick(subcarpeta, imagePaths[subcarpeta][0] || defaultImages[0])}>
-            Ver más
-          </button>
-        </div>
-      ))}
+      <h1 className="tituloProyecto">{titulo}</h1>
+
+      {/* Mostrar el SkeletonCarrousel mientras las imágenes están cargando */}
+      {isLoading ? (
+        <SkeletonCarrousel />
+      ) : (
+        /* Mostrar las imágenes por subcarpeta */
+        subfolders.map((subfolder, index) => (
+          <div key={index}>
+            <h2>{subfolder}</h2>
+            {imagePaths[subfolder] && imagePaths[subfolder].length > 0 && (
+              <Carrousel images={imagePaths[subfolder]} />
+            )}
+          </div>
+        ))
+      )}
     </div>
   );
 };
