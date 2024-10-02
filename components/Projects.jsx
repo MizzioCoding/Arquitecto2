@@ -49,6 +49,14 @@ const Projects = ({ titulo }) => {
     getSubfolders();
   }, [titulo]);
 
+  const cleanSubfolder = (subfolder) => {
+    return subfolder.replace(/_/g, " ");
+  };
+
+  const handleProjectClick = (subfolder) => {
+    navigate(`/concursos/${subfolder}`);
+  };
+
   return (
     <div className="projects">
       <h1 className="tituloProyecto">{titulo}</h1>
@@ -60,9 +68,14 @@ const Projects = ({ titulo }) => {
         /* Mostrar las imágenes por subcarpeta */
         subfolders.map((subfolder, index) => (
           <div key={index}>
-            <h2>{subfolder}</h2>
+            <h2>{cleanSubfolder(subfolder)}</h2>
             {imagePaths[subfolder] && imagePaths[subfolder].length > 0 && (
-              <Carrousel images={imagePaths[subfolder]} />
+              <>
+                <Carrousel images={imagePaths[subfolder]} />
+                <button className="verMas" onClick={() => handleProjectClick(subfolder)}>
+                  Ver más
+                </button>
+              </>
             )}
           </div>
         ))
