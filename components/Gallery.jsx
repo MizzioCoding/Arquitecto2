@@ -9,11 +9,11 @@ import img1 from '../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp
 import img2 from '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp';
 import portadaCosta from "../src/assets/Concursos/Concurso_Costa_Urbana/1.webp";
 import portadaHawa from "../src/assets/Concursos/Concurso_HAWA/1.webp";
-import portadaSumInta from "../src/assets/Concursos/Concurso_Sum_Inta/1.webp";
+import portadaSumInta from "../src/assets/Concursos/Concurso_SUM_INTA/1.webp";
 import portadaSantaFe from "../src/assets/Viviendas/Santa_Fe/1.webp";
 import portadaAlberti from "../src/assets/Viviendas/Alberti/1.webp";
-import portadaSanSebastian from "../src/assets//Viviendas/San_Sebastian_A1/1.webp";
-import portadaSmata from "../src/assets/Viviendas/Smata/1.webp";
+import portadaSanSebastian from "../src/assets/Viviendas/San_Sebastian_A1/1.webp";
+import portadaSmata from "../src/assets/Viviendas/SMATA/1.webp";
 import portadaEstudioINA from "../src/assets/Comercial/Estudio_INA/1.webp";
 import portadaDino from "../src/assets/Comercial/DINO/1.webp";
 import portadaManuela from "../src/assets/Reformas/Manuela_Pedraza/Renders/1.webp";
