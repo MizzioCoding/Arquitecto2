@@ -67,7 +67,7 @@ const Projects = ({ titulo }) => {
       ) : (
         /* Mostrar las imágenes por subcarpeta */
         subfolders.map((subfolder, index) => (
-          <div key={index}>
+          <div key={index} className="project">
             <h2>{cleanSubfolder(subfolder)}</h2>
             {imagePaths[subfolder] && imagePaths[subfolder].length > 0 && (
               <>

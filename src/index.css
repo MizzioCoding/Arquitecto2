@@ -485,10 +485,9 @@ button[type="submit"]:hover {
     flex-direction: column;
     margin: 0 auto;
     width: 100%;
-    padding: 20px;
 }
 
-.project h2 {
+.projects h2 {
     text-align: center;
     margin-bottom: 20px;
     color: #333;
@@ -559,6 +558,17 @@ button[type="submit"]:hover {
     font-size: 2rem;
 }
 
+.concursos,
+.reformas,
+.viviendas,
+.comercial h2{
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-family: 'CustomFont', sans-serif;
+    font-size: 1.4rem;
+}
+
 .verMas {
     display: flex;
     justify-content: center;
@@ -605,15 +615,6 @@ button[type="submit"]:hover {
 
 
 
-@keyframes loading {
-    0% {
-        background-position: 200% 0;
-    }
-
-    100% {
-        background-position: -200% 0;
-    }
-}
 
 
 @media (max-width: 768px) {
@@ -725,6 +726,20 @@ button[type="submit"]:hover {
         height: 200px;
     }
 
+    .carousel-thumbnails {
+        width: 100%;
+        height: 100%;
+        overflow-x: scroll;
+    }
+    .thumbnail {
+        max-width: 30px;
+        max-height: 30px;
+    }
+
+    .verMas {
+        width: 100%;
+    }
+
     .portada {
         width: 100%;
     }
@@ -751,5 +766,16 @@ button[type="submit"]:hover {
 
     100% {
         opacity: 1;
+    }
+}
+
+
+@keyframes loading {
+    0% {
+        background-position: 200% 0;
+    }
+
+    100% {
+        background-position: -200% 0;
     }
 }
