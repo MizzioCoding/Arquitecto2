@@ -26,9 +26,9 @@ function App() {
           <Route path="/" element={<Gallery />} />
           <Route path="/proyectos" element={<Gallery />} />
           <Route path="/concursos/:nombreConcurso" element={<Concursos />} />
-          <Route path="/viviendas/:project" element={<Viviendas />} />
-          <Route path="/comercial/:project" element={<Comercial />} />
-          <Route path="/reformas/:project" element={<Reformas />} />
+          <Route path="/viviendas/:nombreVivienda" element={<Viviendas />} />
+          <Route path="/comercial/:nombreComercial" element={<Comercial />} />
+          <Route path="/reformas/:nombreReforma" element={<Reformas />} />
           <Route path="/concursos" element={<Projects titulo={"Concursos"} />} />
           <Route path="/viviendas" element={<Projects titulo={"Viviendas"} />} />
           <Route path="/comercial" element={<Projects titulo={"Comercial"} />} />
