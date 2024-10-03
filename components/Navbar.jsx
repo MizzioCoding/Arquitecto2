@@ -45,10 +45,10 @@ const Navigation = () => {
           <span className="bar"></span>
         </button>
         <div className={`linksAlign ${isOpen ? "open" : ""}`}>
-          <div  onMouseEnter={toggleProjects} onMouseLeave={toggleProjects}>
-            <Link className="link" to="/proyectos" onClick={() => setIsOpen(false)}>
-              <span>Proyectos</span> <SlArrowRight className={`arrow ${isProjectsOpen ? "open" : ""}`} />
-            </Link>
+          <div onClick={toggleProjects} className="projects-dropdown">
+            <span className="link">
+              <Link className="link" to="/proyectos" onClick={()=> setIsOpen(false)} >Proyectos</Link> <SlArrowRight className={`arrow ${isProjectsOpen ? "open" : ""}`} />
+            </span>
             {isProjectsOpen && (
               <div className="sub-menu">
                 <Link className="sub-link" to="/concursos" onClick={() => setIsOpen(false)}>Concursos</Link>

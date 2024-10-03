@@ -655,6 +655,26 @@ button[type="submit"]:hover {
         justify-content: flex-end;
     }
 
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .linksAlign.open {
+        display: flex;
+    }
+
+    .link {
+        margin: 10px 0;
+    }
+
+    .sub-menu {
+        position: relative;
+        top: auto;
+        left: auto;
+        box-shadow: none;
+    }
+
     .linksAlign {
         display: none;
         flex-direction: column;
@@ -708,6 +728,7 @@ button[type="submit"]:hover {
     .portada {
         width: 100%;
     }
+
     .tituloConcurso {
         font-size: 1.8rem;
     }
