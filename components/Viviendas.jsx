@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import Carrousel from './Carrousel'; // Asegúrate de importar el componente Carrousel
 import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el SkeletonCarrousel
 import "../src/index.css";
 
 const Viviendas = () => {
-  const { nombreVivienda } = useParams(); // Obtenemos el nombre del concurso desde la URL
+  const { nombreVivienda } = useParams(); // Obtenemos el nombre de la vivienda desde la URL
   const [imagenesPorCarpeta, setImagenesPorCarpeta] = useState({});
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
@@ -21,18 +20,18 @@ const Viviendas = () => {
 
         const carpetas = {};
 
-        // Procesamos las rutas obtenidas y las filtramos por el concurso
+        // Procesamos las rutas obtenidas y las filtramos por la vivienda
         for (const ruta in archivos) {
-          // Filtrar por el nombre del concurso
+          // Filtrar por el nombre de la vivienda
           if (ruta.includes(nombreVivienda)) {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5]; // Ajusta según la estructura real del path
             
-            const fileName = partesRuta[5]; // Obtener el nombre del archivo
+            const fileName = partesRuta[6]; // Obtener el nombre del archivo
 
             const filePath = await archivos[ruta](); // Resolvemos la imagen o archivo
 
-            // Si estamos en la carpeta del concurso, buscamos la portada y la descripción
+            // Si estamos en la carpeta de la vivienda, buscamos la portada y la descripción
             if (fileName === '1.webp') {
               setPortadaImage(filePath.default); // Guardar la portada y continuar
               continue;
@@ -65,11 +64,11 @@ const Viviendas = () => {
   }, [nombreVivienda]);
 
   const normalizeName = (name) => {
-    return name.replace(/_/g, ' ');
+    return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
   };
 
   return (
-    <div className="Viviendas">
+    <div className="viviendas">
       <h1 className="tituloVivienda">{normalizeName(nombreVivienda)}</h1>
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
@@ -84,14 +83,17 @@ const Viviendas = () => {
         <SkeletonCarrousel /> 
       ) : (
         /* Mostrar las imágenes por carpeta */
-        Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-          <div key={index}>
-            {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
-            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
-              <Carrousel images={imagenesPorCarpeta[carpeta]} />
-            )}
-          </div>
-        ))
+        <div className="image-grid">
+          {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+            <div key={index} className="carpeta-items">
+              {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+                imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
+                  <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
+                ))
+              )}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );

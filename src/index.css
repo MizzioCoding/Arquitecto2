@@ -561,7 +561,7 @@ button[type="submit"]:hover {
 .concursos,
 .reformas,
 .viviendas,
-.comercial h2{
+.comercial h2 {
     text-align: center;
     margin-bottom: 30px;
     color: #333;
@@ -613,8 +613,25 @@ button[type="submit"]:hover {
     border-radius: 5px;
 }
 
+.image-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    /* Centra las imágenes horizontalmente */
+    width: 60%;
+}
 
-
+.image-item {
+    width: 200px;
+    /* Ajusta este valor según tus necesidades */
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    object-fit: cover;
+    margin: 5px;
+    /* Asegura que la imagen mantenga su proporción */
+}
 
 
 @media (max-width: 768px) {
@@ -731,6 +748,7 @@ button[type="submit"]:hover {
         height: 100%;
         overflow-x: scroll;
     }
+
     .thumbnail {
         max-width: 30px;
         max-height: 30px;

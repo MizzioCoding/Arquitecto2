@@ -53,8 +53,8 @@ const Projects = ({ titulo }) => {
     return subfolder.replace(/_/g, " ");
   };
 
-  const handleProjectClick = (subfolder) => {
-    navigate(`/concursos/${subfolder}`);
+  const handleProjectClick = (projectType, subfolder) => {
+    navigate(`/${projectType}/${subfolder}`);
   };
 
   return (
@@ -72,7 +72,7 @@ const Projects = ({ titulo }) => {
             {imagePaths[subfolder] && imagePaths[subfolder].length > 0 && (
               <>
                 <Carrousel images={imagePaths[subfolder]} />
-                <button className="verMas" onClick={() => handleProjectClick(subfolder)}>
+                <button className="verMas" onClick={() => handleProjectClick(titulo,subfolder)}>
                   Ver más
                 </button>
               </>
