@@ -9,11 +9,11 @@ const Footer = () => {
         <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer">
           <FaInstagram className="icon" />
         </a>
-        <a href="mailto:loremimpsum@gmail.com">
+        <a href="mailto:ezequielschreiber@gmail.com">
           <FaEnvelope className="icon" />
         </a>
       </div>
-      <p>También puedes contactarnos por <a href="mailto:loremimpsum@gmail.com">loremimpsum@gmail.com</a></p>
+      <p>También puedes contactarnos por <a href="mailto:ezequielschreiber@gmail.com">ezequielschreiber@gmail.com</a></p>
       <div className="footer-copy">
         <small>&copy; 2024 Mizzio Coding all rights reserved</small>
       </div>
