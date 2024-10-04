@@ -623,7 +623,7 @@ button[type="submit"]:hover {
 }
 
 .image-item {
-    width: 200px;
+    max-width: 300px;
     /* Ajusta este valor según tus necesidades */
     height: auto;
     border-radius: 8px;
