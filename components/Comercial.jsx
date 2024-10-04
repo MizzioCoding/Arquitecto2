@@ -52,6 +52,7 @@ const Comercial = () => {
           }
         }
 
+        console.log("Imágenes cargadas:", carpetas); // Verificar las imágenes cargadas
         setImagenesPorCarpeta(carpetas);
       } catch (error) {
         console.error("Error al cargar las imágenes:", error);
@@ -64,7 +65,7 @@ const Comercial = () => {
   }, [nombreReforma]);
 
   const normalizeName = (name) => {
-    return name.replace(/_/g, ' ');
+    return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
   };
 
   return (
@@ -84,16 +85,16 @@ const Comercial = () => {
       ) : (
         /* Mostrar las imágenes por carpeta */
         <div className="image-grid">
-        {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-          <div key={index}>
-            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
-              imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
-                <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
-              ))
-            )}
-          </div>
-        ))}
-      </div>
+          {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+            <div key={index} className="carpeta-items">
+              {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+                imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
+                  <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
+                ))
+              )}
+            </div>
+          ))}
+        </div>
       )}
     </div>
   );
