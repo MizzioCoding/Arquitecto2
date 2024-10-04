@@ -26,20 +26,19 @@ const Gallery = () => {
   // Usa las imágenes importadas en lugar de las rutas relativas
   const images = [
     { src: img1, srctxt: '../src/assets/Concursos/Concurso_Urbano_Imagina_Bolivar/1.webp', text: "CONCURSO Urbano Imagina Bolivar" },
-    { src: img2, srctxt: '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp', text: "CONCURSO Biblioteca Sarmiento" },
-    { src: portadaCosta, srctxt: '../src/assets/Concursos/Concurso_Costa_Urbana/1.webp', text: "CONCURSO Costa Urbana" },
-    { src: portadaHawa, srctxt: '../src/assets/Concursos/Concurso_HAWA/1.webp', text: "CONCURSO HAWA" },
-    { src: portadaSumInta, srctxt: '../src/assets/Concursos/Concurso_SUM_INTA/1.webp', text: "CONCURSO SUM INTA" },
     { src: portadaSantaFe, srctxt: '../src/assets/Viviendas/Santa_Fe/1.webp', text: "VIVIENDAS Santa Fe" },
-    { src: portadaAlberti, srctxt: '../src/assets/Viviendas/Alberti/1.webp', text: "VIVIENDAS Alberti" },
-    { src: portadaSanSebastian, srctxt: '../src/assets/Viviendas/San_Sebastian_A1/1.webp', text: "VIVIENDAS San Sebastian" },
-    { src: portadaSmata, srctxt: '../src/assets/Viviendas/SMATA/1.webp', text: "VIVIENDAS SMATA" },
     { src: portadaEstudioINA, srctxt: '../src/assets/Comercial/Estudio_INA/1.webp', text: "COMERCIAL Estudio INA" },
-    { src: portadaDino, srctxt: '../src/assets/Comercial/DINO/1.webp', text: "COMERCIAL DINO" },
     { src: portadaManuela, srctxt: '../src/assets/Reformas/Manuela_Pedraza/Renders/1.webp', text: "REFORMAS Manuela Pedraza" },
-    { src: portadaTerrada, srctxt: '../src/assets/Reformas/Cocina_Terrada/1.webp', text: "REFORMAS Cocina Terrada" }
-    
-  ];
+    { src: img2, srctxt: '../src/assets/Concursos/Concurso_Biblioteca_Sarmiento/1.webp', text: "CONCURSO Biblioteca Sarmiento" },
+    { src: portadaAlberti, srctxt: '../src/assets/Viviendas/Alberti/1.webp', text: "VIVIENDAS Alberti" },
+    { src: portadaDino, srctxt: '../src/assets/Comercial/DINO/1.webp', text: "COMERCIAL DINO" },
+    { src: portadaTerrada, srctxt: '../src/assets/Reformas/Cocina_Terrada/1.webp', text: "REFORMAS Cocina Terrada" },
+    { src: portadaCosta, srctxt: '../src/assets/Concursos/Concurso_Costa_Urbana/1.webp', text: "CONCURSO Costa Urbana" },
+    { src: portadaSanSebastian, srctxt: '../src/assets/Viviendas/San_Sebastian_A1/1.webp', text: "VIVIENDAS San Sebastian" },
+    { src: portadaHawa, srctxt: '../src/assets/Concursos/Concurso_HAWA/1.webp', text: "CONCURSO HAWA" },
+    { src: portadaSmata, srctxt: '../src/assets/Viviendas/SMATA/1.webp', text: "VIVIENDAS SMATA" },
+    { src: portadaSumInta, srctxt: '../src/assets/Concursos/Concurso_SUM_INTA/1.webp', text: "CONCURSO SUM INTA" }
+];
 
   const handleLoadMore = () => {
     setVisibleCount((prevCount) => prevCount + 10);
