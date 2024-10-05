@@ -4,7 +4,7 @@ import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el SkeletonCarr
 import "../src/index.css";
 
 const Comercial = () => {
-  const { nombreReforma } = useParams(); // Obtenemos el nombre de la reforma desde la URL
+  const { nombreComercial } = useParams(); // Obtenemos el nombre de la reforma desde la URL
   const [imagenesPorCarpeta, setImagenesPorCarpeta] = useState({});
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
@@ -23,7 +23,7 @@ const Comercial = () => {
         // Procesamos las rutas obtenidas y las filtramos por la reforma
         for (const ruta in archivos) {
           // Filtrar por el nombre de la reforma
-          if (ruta.includes(nombreReforma)) {
+          if (ruta.includes(nombreComercial)) {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5]; // Ajusta según la estructura real del path
             
@@ -62,7 +62,7 @@ const Comercial = () => {
     };
 
     importarImagenes();
-  }, [nombreReforma]);
+  }, [nombreComercial]);
 
   const normalizeName = (name) => {
     return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
@@ -70,7 +70,7 @@ const Comercial = () => {
 
   return (
     <div className="comercial">
-      <h1 className="tituloReforma">{normalizeName(nombreReforma)}</h1>
+      <h1 className="tituloReforma">{normalizeName(nombreComercial)}</h1>
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
         <div className="portada">
