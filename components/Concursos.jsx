@@ -37,7 +37,7 @@ const Concursos = () => {
               setPortadaImage(filePath.default); // Guardar la portada y continuar
               continue;
             }
-
+            
             if (fileName === 'Descripcion.txt') {
               const response = await fetch(filePath.default); // Leer el archivo de texto
               const text = await response.text();

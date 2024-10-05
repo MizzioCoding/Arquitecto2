@@ -1,66 +1,58 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
-import SkeletonCarrousel from './SkeletonCarrousel'; // Importar el SkeletonCarrousel
+import SkeletonCarrousel from './SkeletonCarrousel';
 import "../src/index.css";
 
 const Reformas = () => {
-  const { nombreReforma } = useParams(); // Obtenemos el nombre de la reforma desde la URL
+  const { nombreReforma } = useParams();
   const [imagenesPorCarpeta, setImagenesPorCarpeta] = useState({});
-  const [portadaImage, setPortadaImage] = useState(null);
-  const [portadaDescription, setPortadaDescription] = useState(null);
+  const [videoLinks, setVideoLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const importarImagenes = async () => {
+    const importarRecursos = async () => {
       try {
-        // Cargamos todas las imágenes de todas las carpetas
         const archivos = import.meta.glob(
-          "../src/assets/Reformas/**/*.{webp,txt}"
+          "../src/assets/Reformas/**/**/*.{webp,txt}"
         );
 
         const carpetas = {};
+        let videosEncontrados = [];
 
-        // Procesamos las rutas obtenidas y las filtramos por la reforma
         for (const ruta in archivos) {
-          // Filtrar por el nombre de la reforma
           if (ruta.includes(nombreReforma)) {
             const partesRuta = ruta.split("/");
-            const nombreCarpeta = partesRuta[5]; // Ajusta según la estructura real del path
+            const nombreCarpeta = partesRuta[5];
             
-            const fileName = partesRuta[6]; // Obtener el nombre del archivo
+            const fileName = partesRuta[5];
 
-            const filePath = await archivos[ruta](); // Resolvemos la imagen o archivo
+            const filePath = await archivos[ruta]();
 
-            // Si estamos en la carpeta de la reforma, buscamos la portada y la descripción
-            if (fileName === '1.webp') {
-              setPortadaImage(filePath.default); // Guardar la portada y continuar
-              continue;
-            }
-
-            if (fileName === 'Descripcion.txt') {
-              const response = await fetch(filePath.default); // Leer el archivo de texto
+            if (fileName === 'Vids.txt') {
+              const response = await fetch(filePath.default);
               const text = await response.text();
-              setPortadaDescription(text); // Guardar la descripción y continuar
+              videosEncontrados = text.split("\n").filter(link => link.trim() !== "");
+              alert(videosEncontrados);
+              setVideoLinks(videosEncontrados);
               continue;
             }
 
-            // Si es una imagen válida y no es la portada, la añadimos a la carpeta correspondiente
             if (!carpetas[nombreCarpeta]) {
               carpetas[nombreCarpeta] = [];
             }
-            carpetas[nombreCarpeta].push(filePath.default); // Guardamos la imagen
+            carpetas[nombreCarpeta].push(filePath.default);
           }
         }
 
         setImagenesPorCarpeta(carpetas);
       } catch (error) {
-        console.error("Error al cargar las imágenes:", error);
+        console.error("Error al cargar las imágenes o videos:", error);
       } finally {
-        setIsLoading(false); // Cambiar el estado de carga a false después de procesar
+        setIsLoading(false);
       }
     };
 
-    importarImagenes();
+    importarRecursos();
   }, [nombreReforma]);
 
   const normalizeName = (name) => {
@@ -70,30 +62,41 @@ const Reformas = () => {
   return (
     <div className="reformas">
       <h1 className="tituloReforma">{normalizeName(nombreReforma)}</h1>
-      {/* Mostrar la portada si está disponible */}
-      {portadaImage && (
-        <div className="portada">
-          <img src={portadaImage} alt="Portada" />
-          {portadaDescription && <p>{portadaDescription}</p>}
-        </div>
-      )}
 
-      {/* Mostrar el SkeletonCarrousel mientras las imágenes están cargando */}
       {isLoading ? (
         <SkeletonCarrousel /> 
       ) : (
-        /* Mostrar las imágenes por carpeta */
-        <div className="image-grid">
-        {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-          <div key={index}>
-            {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
-              imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
-                <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
-              ))
-            )}
+        <>
+          <div className="image-grid">
+            {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+              <div key={index}>
+                {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
+                  imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
+                    <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
+                  ))
+                )}
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+
+          {videoLinks.length > 0 && (
+            <div className="videos">
+              <h2>Videos</h2>
+              {videoLinks.map((link, index) => (
+                <iframe
+                  key={index}
+                  width="560"
+                  height="315"
+                  src={link.replace("shorts/", "embed/")}
+                  title={`Video ${index + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ))}
+            </div>
+          )}
+        </>
       )}
     </div>
   );
