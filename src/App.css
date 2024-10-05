@@ -42,3 +42,40 @@
     /* Tamaño de fuente opcional */
     color: #333;
 }
+
+.float {
+    position: fixed;
+    width: 50px;
+    height: 50px;
+    bottom: 30px;
+    right: 20px;
+    background-color: #25D367;
+    color: #FFF;
+    border-radius: 50px;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 2px 5px 10px rgba(0, 0, 0, 0.651);
+    z-index: 100;
+    animation-name: floaty;
+    animation-duration: 5s;
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite;
+}
+
+.my-float {
+    margin-top: 10px;
+}
+
+@keyframes floaty {
+    0% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(10px);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}

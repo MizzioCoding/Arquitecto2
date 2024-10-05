@@ -10,6 +10,7 @@ import Concursos from '../components/Concursos';
 import Viviendas from '../components/Viviendas';
 import Comercial from '../components/Comercial';
 import Reformas from '../components/Reformas';
+import { FaWhatsapp } from 'react-icons/fa'; // Importa el ícono de WhatsApp
 
 function App() {
 
@@ -22,6 +23,9 @@ function App() {
       </div>
       <Navigation />
       <div>
+      <a href="https://wa.link/udw10f" className="float" target="_blank" id="wppIcon" style={{ display: 'block' }}>
+          <FaWhatsapp className="my-float" /> {/* Usa el componente de React para el ícono */}
+        </a>
         <Routes>
           <Route path="/" element={<Gallery />} />
           <Route path="/proyectos" element={<Gallery />} />
