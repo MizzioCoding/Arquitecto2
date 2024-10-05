@@ -651,6 +651,15 @@ button[type="submit"]:hover {
     margin-top: 20px;
 }
 
+.carpeta-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: row wrap;
+    margin: 0 auto;
+    gap: 50px;
+    width: 100%;
+}
 
 
 @media (max-width: 768px) {
