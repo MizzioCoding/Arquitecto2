@@ -23,7 +23,7 @@ const Reformas = () => {
           if (ruta.includes(nombreReforma)) {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5];
-            
+
             const fileName = partesRuta[5];
 
             const filePath = await archivos[ruta]();
@@ -32,7 +32,6 @@ const Reformas = () => {
               const response = await fetch(filePath.default);
               const text = await response.text();
               videosEncontrados = text.split("\n").filter(link => link.trim() !== "");
-              alert(videosEncontrados);
               setVideoLinks(videosEncontrados);
               continue;
             }
@@ -64,12 +63,12 @@ const Reformas = () => {
       <h1 className="tituloReforma">{normalizeName(nombreReforma)}</h1>
 
       {isLoading ? (
-        <SkeletonCarrousel /> 
+        <SkeletonCarrousel />
       ) : (
         <>
           <div className="image-grid">
             {Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
-              <div key={index}>
+              <div key={index} className="imagenCard">
                 {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
                   imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
                     <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
@@ -80,21 +79,25 @@ const Reformas = () => {
           </div>
 
           {videoLinks.length > 0 && (
-            <div className="videos">
+            <>
               <h2>Videos</h2>
-              {videoLinks.map((link, index) => (
-                <iframe
-                  key={index}
-                  width="560"
-                  height="315"
-                  src={link.replace("shorts/", "embed/")}
-                  title={`Video ${index + 1}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              ))}
-            </div>
+
+              <div className="videos">
+                {videoLinks.map((link, index) => (
+                  <iframe
+                    key={index}
+                    width="100%"
+                    height="100%"
+                    src={link.replace("shorts/", "embed/")}
+                    title={`Video ${index + 1}`}
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    style={{ borderRadius: "6px" }}
+                  ></iframe>
+                ))}
+              </div>
+            </>
           )}
         </>
       )}
