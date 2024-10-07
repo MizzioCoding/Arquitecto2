@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect,useRef } from "react";
 import { Link } from "react-router-dom";
 import logo from "../src/assets/LOGO Schreiber PNG.png";
 import { SlArrowRight } from "react-icons/sl";
@@ -7,9 +7,10 @@ const Navigation = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isProjectsOpen, setIsProjectsOpen] = useState(false);
+  const menuRef = useRef(null);
 
   const handleScroll = () => {
-    if (window.scrollY > 200) {
+    if (window.scrollY > 50) {
       setScrolled(true);
     } else {
       setScrolled(false);
@@ -31,6 +32,20 @@ const Navigation = () => {
     setIsProjectsOpen(!isProjectsOpen);
   };
 
+  const handleClickOutside = (event) => {
+    if (menuRef.current && !menuRef.current.contains(event.target)) {
+      setIsOpen(false);
+      setIsProjectsOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className={`navbar ${scrolled ? "scrolled" : ""}`}>
       <img
@@ -44,7 +59,7 @@ const Navigation = () => {
           <span className="bar"></span>
           <span className="bar"></span>
         </button>
-        <div className={`linksAlign ${isOpen ? "open" : ""}`}>
+        <div ref={menuRef} className={`linksAlign ${isOpen ? "open" : ""}`}>
           <div onClick={toggleProjects} className="projects-dropdown">
             <span className="link">
               <Link className="link" to="/proyectos" onClick={()=> setIsOpen(false)} >Proyectos</Link> <SlArrowRight className={`arrow ${isProjectsOpen ? "open" : ""}`} />

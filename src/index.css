@@ -290,7 +290,7 @@ div {
     height: 100%;
     display: block;
     border-radius: 14px;
-    object-fit: cover;
+    object-fit: contain;
 }
 
 .carousel-control-prev,
