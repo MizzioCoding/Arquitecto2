@@ -9,6 +9,8 @@ const Viviendas = () => {
   const [portadaImage, setPortadaImage] = useState(null);
   const [portadaDescription, setPortadaDescription] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [modalImage, setModalImage] = useState(null); // Estado para la imagen del modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
 
   useEffect(() => {
     const importarImagenes = async () => {
@@ -67,6 +69,16 @@ const Viviendas = () => {
     return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
   };
 
+  const openModal = (image) => {
+    setModalImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImage(null);
+  };
+
   return (
     <div className="viviendas">
       <h1 className="tituloVivienda">{normalizeName(nombreVivienda)}</h1>
@@ -88,11 +100,25 @@ const Viviendas = () => {
             <div key={index} className="carpeta-items">
               {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
                 imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
-                  <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
+                  <img
+                    key={imgIndex}
+                    src={image}
+                    alt={`Imagen ${imgIndex + 1}`}
+                    className="image-item"
+                    onClick={() => openModal(image)} // Abrir el modal al hacer clic en la imagen
+                  />
                 ))
               )}
             </div>
           ))}
+        </div>
+      )}
+
+      {/* Modal para mostrar la imagen en pantalla completa */}
+      {isModalOpen && (
+        <div className="modal">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <img className="modal-content" src={modalImage} alt="Imagen en pantalla completa" />
         </div>
       )}
     </div>

@@ -12,16 +12,22 @@ const Carrousel = ({ images = [] }) => {
     "https://via.placeholder.com/300",
   ];
 
+  // Ordenar las imágenes por el nombre del archivo en orden ascendente
+  const sortedImages = imagesToShow.sort((a, b) => {
+    const nameA = a.split('/').pop().split('.')[0]; // Obtener el nombre del archivo sin extensión
+    const nameB = b.split('/').pop().split('.')[0]; // Obtener el nombre del archivo sin extensión
+    return parseInt(nameA) - parseInt(nameB); // Comparar como números
+  });
 
   const handlePrev = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === 0 ? imagesToShow.length - 1 : prevIndex - 1
+      prevIndex === 0 ? sortedImages.length - 1 : prevIndex - 1
     );
   };
 
   const handleNext = () => {
     setCurrentIndex((prevIndex) =>
-      prevIndex === imagesToShow.length - 1 ? 0 : prevIndex + 1
+      prevIndex === sortedImages.length - 1 ? 0 : prevIndex + 1
     );
   };
 
@@ -35,7 +41,7 @@ const Carrousel = ({ images = [] }) => {
         className="carousel-inner"
         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
       >
-        {imagesToShow.map((image, index) => (
+        {sortedImages.map((image, index) => (
           <div key={index} className="carousel-item">
             <img src={image} className="d-block w-100" alt={`Slide ${index}`} />
           </div>
@@ -56,7 +62,7 @@ const Carrousel = ({ images = [] }) => {
         <SlArrowRight className="carousel-control-next-icon" />
       </button>
       <div className="carousel-thumbnails">
-        {imagesToShow.map((image, index) => (
+        {sortedImages.map((image, index) => (
           <img
             key={index}
             src={image}

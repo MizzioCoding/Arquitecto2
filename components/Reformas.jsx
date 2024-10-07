@@ -8,6 +8,8 @@ const Reformas = () => {
   const [imagenesPorCarpeta, setImagenesPorCarpeta] = useState({});
   const [videoLinks, setVideoLinks] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [modalImage, setModalImage] = useState(null); // Estado para la imagen del modal
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para controlar el modal
 
   useEffect(() => {
     const importarRecursos = async () => {
@@ -24,7 +26,7 @@ const Reformas = () => {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5];
 
-            const fileName = partesRuta[5];
+            const fileName = partesRuta[6];
 
             const filePath = await archivos[ruta]();
 
@@ -58,6 +60,16 @@ const Reformas = () => {
     return name.replace(/_/g, ' ');
   };
 
+  const openModal = (image) => {
+    setModalImage(image);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setModalImage(null);
+  };
+
   return (
     <div className="reformas">
       <h1 className="tituloReforma">{normalizeName(nombreReforma)}</h1>
@@ -71,7 +83,13 @@ const Reformas = () => {
               <div key={index} className="imagenCard">
                 {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
                   imagenesPorCarpeta[carpeta].map((image, imgIndex) => (
-                    <img key={imgIndex} src={image} alt={`Imagen ${imgIndex + 1}`} className="image-item" />
+                    <img
+                      key={imgIndex}
+                      src={image}
+                      alt={`Imagen ${imgIndex + 1}`}
+                      className="image-item"
+                      onClick={() => openModal(image)} // Abrir el modal al hacer clic en la imagen
+                    />
                   ))
                 )}
               </div>
@@ -100,6 +118,14 @@ const Reformas = () => {
             </>
           )}
         </>
+      )}
+
+      {/* Modal para mostrar la imagen en pantalla completa */}
+      {isModalOpen && (
+        <div className="modal">
+          <span className="close" onClick={closeModal}>&times;</span>
+          <img className="modal-content" src={modalImage} alt="Imagen en pantalla completa" />
+        </div>
       )}
     </div>
   );
