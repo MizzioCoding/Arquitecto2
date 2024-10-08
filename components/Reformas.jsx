@@ -103,15 +103,15 @@ const Reformas = () => {
               <div className="videos">
                 {videoLinks.map((link, index) => (
                   <iframe
-                    key={index}
-                    width="100%"
-                    height="100%"
-                    src={link.replace("shorts/", "embed/")}
-                    title={`Video ${index + 1}`}
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                    allowFullScreen
-                    style={{ borderRadius: "6px" }}
+                  key={index}
+                  width="100%"
+                  height="100%"
+                  src={`${link.replace("shorts/", "embed/")}?modestbranding=1&controls=0&rel=0`}
+                  title={`Video ${index + 1}`}
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+                  allowFullScreen
+                  style={{ borderRadius: "6px" }}
                   ></iframe>
                 ))}
               </div>
