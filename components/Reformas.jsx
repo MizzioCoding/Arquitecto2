@@ -26,7 +26,7 @@ const Reformas = () => {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5];
 
-            const fileName = partesRuta[6];
+            const fileName = partesRuta[5];
 
             const filePath = await archivos[ruta]();
 
@@ -109,7 +109,7 @@ const Reformas = () => {
                     src={link.replace("shorts/", "embed/")}
                     title={`Video ${index + 1}`}
                     frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
                     allowFullScreen
                     style={{ borderRadius: "6px" }}
                   ></iframe>

@@ -29,7 +29,7 @@ const Viviendas = () => {
             const partesRuta = ruta.split("/");
             const nombreCarpeta = partesRuta[5]; // Ajusta según la estructura real del path
             
-            const fileName = partesRuta[6]; // Obtener el nombre del archivo
+            const fileName = partesRuta[5]; // Obtener el nombre del archivo
 
             const filePath = await archivos[ruta](); // Resolvemos la imagen o archivo
 
