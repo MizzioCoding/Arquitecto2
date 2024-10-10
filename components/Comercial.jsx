@@ -67,7 +67,7 @@ const Comercial = () => {
   }, [nombreComercial]);
 
   const normalizeName = (name) => {
-    return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
+    return name.replace(/^\d+_/, '').replace(/_/g, ' ');
   };
 
   const openModal = (image) => {

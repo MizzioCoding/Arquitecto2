@@ -66,7 +66,7 @@ const Viviendas = () => {
   }, [nombreVivienda]);
 
   const normalizeName = (name) => {
-    return name ? name.replace(/_/g, ' ') : ''; // Manejar valores undefined o null
+    return name ? name.replace(/^\d+_/, '').replace(/_/g, ' ') : ''; // Manejar valores undefined o null
   };
 
   const openModal = (image) => {

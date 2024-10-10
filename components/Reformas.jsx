@@ -57,7 +57,7 @@ const Reformas = () => {
   }, [nombreReforma]);
 
   const normalizeName = (name) => {
-    return name.replace(/_/g, ' ');
+    return name.replace(/^\d+_/, '').replace(/_/g, ' ');
   };
 
   const openModal = (image) => {
