@@ -50,7 +50,7 @@ const Projects = ({ titulo }) => {
   }, [titulo]);
 
   const cleanSubfolder = (subfolder) => {
-    return subfolder.replace(/_/g, " ");
+    return subfolder.replace(/^\d+_/, '').replace(/_/g, ' ');
   };
 
   const handleProjectClick = (projectType, subfolder) => {

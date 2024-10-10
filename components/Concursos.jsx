@@ -68,9 +68,20 @@ const Concursos = () => {
     return name.replace(/_/g, ' ');
   };
 
+
+  const removeNumberAndUnderscore = (name) => {
+    return name.replace(/^\d+_/, '').replace(/_/g, ' ');
+  };
+
+  const sortedCarpetas = Object.keys(imagenesPorCarpeta).sort((a, b) => {
+    const numA = parseInt(a.split('_')[0], 10);
+    const numB = parseInt(b.split('_')[0], 10);
+    return numA - numB;
+  });
+
   return (
     <div className="concursos">
-      <h1 className="tituloConcurso">{normalizeName(nombreConcurso)}</h1>
+      <h1 className="tituloConcurso">{removeNumberAndUnderscore(nombreConcurso)}</h1>
       {/* Mostrar la portada si está disponible */}
       {portadaImage && (
         <div className="portada">
@@ -84,9 +95,9 @@ const Concursos = () => {
         <SkeletonCarrousel /> 
       ) : (
         /* Mostrar las imágenes por carpeta */
-        Object.keys(imagenesPorCarpeta).map((carpeta, index) => (
+        sortedCarpetas.map((carpeta, index) => (
           <div key={index}>
-            {carpeta !== 'undefined' && <h2>{normalizeName(carpeta)}</h2>}
+            {carpeta !== 'undefined' && <h2>{removeNumberAndUnderscore(carpeta)}</h2>}
             {imagenesPorCarpeta[carpeta] && imagenesPorCarpeta[carpeta].length > 0 && (
               <Carrousel images={imagenesPorCarpeta[carpeta]} />
             )}
