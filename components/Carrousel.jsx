@@ -2,9 +2,13 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import "../src/index.css";
 import { SlArrowRight } from "react-icons/sl";
+import { FaTimes } from "react-icons/fa"; // Importa el ícono de cerrar
 
 const Carrousel = ({ images = [] }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedImage, setSelectedImage] = useState(null);
+
   const imagesToShow = images.length > 0 ? images : [
     "https://via.placeholder.com/300",
     "https://via.placeholder.com/300",
@@ -35,6 +39,16 @@ const Carrousel = ({ images = [] }) => {
     setCurrentIndex(index);
   };
 
+  const handleImageClick = () => {
+    setSelectedImage(sortedImages[currentIndex]);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedImage(null);
+  };
+
   return (
     <div className="carousel" aria-label="Image Carousel">
       <div
@@ -43,7 +57,12 @@ const Carrousel = ({ images = [] }) => {
       >
         {sortedImages.map((image, index) => (
           <div key={index} className="carousel-item">
-            <img src={image} className="d-block w-100" alt={`Slide ${index}`} />
+            <img
+              src={image}
+              className="d-block w-100"
+              alt={`Slide ${index}`}
+              onClick={handleImageClick}
+            />
           </div>
         ))}
       </div>
@@ -72,6 +91,18 @@ const Carrousel = ({ images = [] }) => {
           />
         ))}
       </div>
+
+      {isModalOpen && (
+        <div className="modal-carrousel" onClick={closeModal}>
+                      <button className="close-modal" onClick={closeModal}>
+              <FaTimes />
+            </button>
+          <div className="modal-carrousel-content" onClick={(e) => e.stopPropagation()}>
+
+            <img src={selectedImage} alt="Selected" className="modal-carrousel-image" />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
