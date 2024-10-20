@@ -14,7 +14,7 @@ import portadaAlberti from "../src/assets/Viviendas/7_Alberti/1.webp";
 import portadaSmata from "../src/assets/Viviendas/9_SMATA/1.webp";
 import portadaEstudioINA from "../src/assets/Comercial/7_Estudio_INA/1.webp";
 import portadaBgo from "../src/assets/Comercial/4_Bauness/1.webp";
-import portadaTerrada from "../src/assets/Reformas/2_Cocina_Terrada/1.webp";
+import portadaTerrada from "../src/assets/Reformas/2_Cocina_Terrada/Renders/1.webp";
 import portadaBilbao from "../src/assets/Comercial/3_Local_Francisco_Bilbao/1.webp";
 // import portadaPorteniaBar from "../src/assets/Viviendas/3_Porteña_Bar/1.webp";
 import portadaTrenesArgentinos from "../src/assets/Comercial/6_Trenes_Argentinos/Renders/1.webp";

@@ -13,17 +13,13 @@ const Projects = ({ titulo }) => {
   useEffect(() => {
     const getSubfolders = async () => {
       try {
-        const context = import.meta.glob("../src/assets/**/Renders/*.{webp,txt}");
-        console.log("Rutas encontradas con glob:", Object.keys(context));
-
+        let context = import.meta.glob("../src/assets/**/Renders/*.{webp,txt}");
         const subfoldersSet = new Set();
         const images = {};
 
         for (const key of Object.keys(context)) {
           const parts = key.split('/');
-          console.log("Partes de la ruta:", parts);
           const folderIndex = parts.indexOf(titulo);  // Asegúrate de que `titulo` sea exactamente igual a la subcarpeta
-          console.log(`Buscando la carpeta ${titulo} en:`, parts, "Índice:", folderIndex);
 
           if (folderIndex !== -1) {
             const subfolder = parts[folderIndex + 1];
