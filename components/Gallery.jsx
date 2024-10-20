@@ -11,7 +11,7 @@ import portadaHawa from "../src/assets/Concursos/4_Concurso_HAWA/1.webp";
 import portadaSumInta from "../src/assets/Concursos/6_Concurso_SUM_INTA/1.webp";
 import portadaSantaFe from "../src/assets/Viviendas/5_Santa_Fe/Renders/1.webp";
 import portadaAlberti from "../src/assets/Viviendas/7_Alberti/1.webp";
-import portadaSmata from "../src/assets/Viviendas/9_SMATA/1.webp";
+// import portadaSmata from "../src/assets/Viviendas/9_SMATA/PORTADA.webp";
 import portadaEstudioINA from "../src/assets/Comercial/7_Estudio_INA/1.webp";
 import portadaBgo from "../src/assets/Comercial/4_Bauness/1.webp";
 import portadaTerrada from "../src/assets/Reformas/2_Cocina_Terrada/Renders/1.webp";
@@ -49,7 +49,7 @@ const Gallery = () => {
     { src: portadaDefensaBar, srctxt: '../src/assets/Comercial/5_Defensa_Bar/1.webp', text: "COMERCIAL Defensa Bar" },
     { src: portadaParqueSalguero, srctxt: '../src/assets/Concursos/2_Concurso_Parque_Salguero/PORTADA.webp', text: "CONSURSOS Parque Salguero" },
     { src: portadaOficinasSiconara, srctxt: '../src/assets/Comercial/1_Oficinas_Siconara/Renders/1.webp', text: "COMERCIAL Oficinas Siconara" },
-    { src: portadaSmata, srctxt: '../src/assets/Viviendas/9_SMATA/1.webp', text: "VIVIENDAS SMATA" },
+    // { src: portadaSmata, srctxt: '../src/assets/Viviendas/9_SMATA/PORTADA.webp', text: "VIVIENDAS SMATA" },
     { src: portadaCosta, srctxt: '../src/assets/Concursos/3_Concurso_Costa_Urbana/1.webp', text: "CONCURSO Costa Urbana" },
     // {src:portadaReformaBeruti , srctxt: '../src/assets/Reformas/3_Reforma_Beruti/1.webp', text: "REFORMAS Beruti"},
     { src: portadaAlberti, srctxt: '../src/assets/Viviendas/7_Alberti/1.webp', text: "VIVIENDAS Alberti" },

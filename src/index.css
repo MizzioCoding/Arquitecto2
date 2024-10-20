@@ -820,7 +820,7 @@ button[type="submit"]:hover {
   }
   
 .modal-carrousel-image {
-    transform: scale(1.5);
+    transform: scale(1.2);
     width: 100%;
     height: auto;
 }
