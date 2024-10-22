@@ -813,7 +813,9 @@ button[type="submit"]:hover {
 
 .modal-carrousel-content {
     position: relative;
-}
+    overflow: auto; /* Permitir scroll dentro del modal */
+    max-height: 90%; /* Limitar la altura del contenido del modal */
+  }
 
 .close-modal {
     position: absolute;
@@ -833,10 +835,17 @@ button[type="submit"]:hover {
     height: 90%;
 }
 
+.modal-open {
+    overflow: hidden;
+  }
+
 .modal-carrousel-image {
-    transform: scale(1.2);
-    width: 100%;
+    max-width: 90%;
+    max-height: 90%;
+    width: auto;
     height: auto;
+    margin: auto;
+    display: block;
 }
 
 .zoom-lens {

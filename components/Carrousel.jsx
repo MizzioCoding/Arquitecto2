@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import "../src/index.css";
 import { SlArrowRight } from "react-icons/sl";
@@ -49,6 +49,14 @@ const Carrousel = ({ images = [] }) => {
     setSelectedImage(null);
   };
 
+  useEffect(() => {
+    if (isModalOpen) {
+      document.body.classList.add("modal-open");
+    } else {
+      document.body.classList.remove("modal-open");
+    }
+  }, [isModalOpen]);
+
   return (
     <div className="carousel" aria-label="Image Carousel">
       <div
@@ -94,11 +102,10 @@ const Carrousel = ({ images = [] }) => {
 
       {isModalOpen && (
         <div className="modal-carrousel" onClick={closeModal}>
-                      <button className="close-modal" onClick={closeModal}>
-              <FaTimes />
-            </button>
-          <div className="modal-carrousel-content" onClick={(e) => e.stopPropagation()}>
-
+          <button className="close-modal" style={{ zIndex: 10 }} onClick={closeModal}>
+            <FaTimes />
+          </button>
+          <div className="modal-carrousel-content" onClick={(e) => e.stopPropagation()} style={{ overflow: 'auto' }}>
             <img src={selectedImage} alt="Selected" className="modal-carrousel-image" />
           </div>
         </div>
