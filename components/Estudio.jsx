@@ -21,7 +21,9 @@ const Estudio = () => {
                         estándares de calidades e imágenes finales del proyecto.
                     </p>
                 </div>
-                <img src={logo} alt="Logo Schreiber" />
+                <div className='logoSchreiber'>
+                    <img src={logo} alt="Logo Schreiber" />
+                </div>
             </div>
             <div className="estudio-align">
                 <div className="estudio-texto">
@@ -46,7 +48,7 @@ const Estudio = () => {
                         diferentes grupos y colectivos de artistas visuales, pintores y diseñadores gráficos.
                     </p>
                 </div>
-                <img src={ezequiel} alt="Ezequiel Schreiber" />
+                <img className='logoEzequiel' src={ezequiel} alt="Ezequiel Schreiber" />
             </div>
         </div>
     );

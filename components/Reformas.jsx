@@ -88,39 +88,37 @@ const Reformas = () => {
                       src={image}
                       alt={`Imagen ${imgIndex + 1}`}
                       className="image-item"
-                      onClick={() => openModal(image)} // Abrir el modal al hacer clic en la imagen
-                    />
-                  ))
-                )}
-              </div>
-            ))}
-          </div>
+                      // Abrir el modal al hacer clic en la imagen
+                                />
+                                ))
+                              )}
+                              </div>
+                            ))}
+                            </div>
 
-          {videoLinks.length > 0 && (
-            <>
-              <h2>Videos</h2>
+                            {videoLinks.length > 0 && (
+                            <>
+                              <h2>Videos</h2>
 
-              <div className="videos">
-                {videoLinks.map((link, index) => (
-                  <iframe
-                  key={index}
-                  width="100%"
-                  height="100%"
-                  src={`${link.replace("shorts/", "embed/")}?modestbranding=1&controls=0&rel=0`}
-                  title={`Video ${index + 1}`}
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
-                  allowFullScreen
-                  style={{ borderRadius: "6px" }}
-                  ></iframe>
-                ))}
-              </div>
-            </>
-          )}
-        </>
-      )}
-
-      {/* Modal para mostrar la imagen en pantalla completa */}
+                              <div className="videos">
+                              {videoLinks.map((link, index) => (
+                                <iframe
+                                key={index}
+                                width="auto"
+                                height="auto"
+                                src={`${link.replace("shorts/", "embed/")}?modestbranding=1&controls=0&rel=0`}
+                                title={`Video ${index + 1}`}
+                                frameBorder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope;"
+                                allowFullScreen
+                                style={{ borderRadius: "6px", width: "100%", maxWidth: "220px" }}
+                                ></iframe>
+                              ))}
+                              </div>
+                            </>
+                            )}
+                          </>
+                          )}
       {isModalOpen && (
         <div className="modal">
           <span className="close" onClick={closeModal}>&times;</span>

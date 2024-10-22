@@ -701,9 +701,9 @@ button[type="submit"]:hover {
     width: 100%;
     height: auto;
     gap: 50px;
-  }
+}
 
-  .estudio-align{
+.estudio-align {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -711,65 +711,79 @@ button[type="submit"]:hover {
     margin: 0 auto;
     gap: 50px;
     width: 100%;
-  }
-  
-  .estudio-texto {
+}
+
+.estudio-texto {
     max-width: 600px;
-  }
-  
-  .estudio-titulo {
+}
+
+.estudio-titulo {
     font-size: 24px;
     font-weight: bold;
     color: #789c53;
-  }
-  
-  .estudio-subtitulo {
+}
+
+.estudio-subtitulo {
     font-size: 20px;
     font-weight: bold;
     margin-top: 20px;
     color: #789c53;
-  }
-  
-  .estudio-arquitecto {
+}
+
+.estudio-arquitecto {
     font-size: 18px;
     font-weight: bold;
     margin-top: 10px;
-  }
-  
-  .estudio-descripcion {
+}
+
+.estudio-descripcion {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 10px;
-  }
-  
-  .estudio-align img{
+}
+
+.logoSchreiber {
     width: 30%;
     height: auto;
     border-radius: 5px;
-  }
+    display: flex;
+    justify-content: center;
+}
 
-  
-  .estudio-nombre {
+.logoSchreiber img {
+    width: 85%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.logoEzequiel {
+    width: 30%;
+    height: auto;
+    border-radius: 5px;
+
+}
+
+.estudio-nombre {
     font-size: 30px;
     font-weight: bold;
-  }
-  
-  .estudio-eslogan {
+}
+
+.estudio-eslogan {
     font-size: 16px;
     font-weight: normal;
-  }
-  
-  .estudio-imagen img {
+}
+
+.estudio-imagen img {
     width: 100%;
     height: auto;
     border-radius: 5px;
-  }
+}
 
-  .estudio-imagen{
+.estudio-imagen {
     width: 50%;
-  }
-  
-  .estudio-imagenes{
+}
+
+.estudio-imagenes {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -778,13 +792,13 @@ button[type="submit"]:hover {
     gap: 50px;
     width: 100%;
     height: 100%;
-  }
+}
 
-  .carousel-thumbnails img {
+.carousel-thumbnails img {
     cursor: pointer;
-  }
-  
-  .modal-carrousel {
+}
+
+.modal-carrousel {
     position: fixed;
     top: 0;
     left: 0;
@@ -795,13 +809,13 @@ button[type="submit"]:hover {
     justify-content: center;
     align-items: center;
     z-index: 1000;
-  }
-  
-  .modal-carrousel-content {
+}
+
+.modal-carrousel-content {
     position: relative;
-  }
-  
-  .close-modal {
+}
+
+.close-modal {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -810,22 +824,22 @@ button[type="submit"]:hover {
     color: rgb(255, 255, 255);
     font-size: 24px;
     cursor: pointer;
-  }
-  
-  .zoom-container {
+}
+
+.zoom-container {
     position: relative;
     overflow: hidden;
     width: 90%;
     height: 90%;
-  }
-  
+}
+
 .modal-carrousel-image {
     transform: scale(1.2);
     width: 100%;
     height: auto;
 }
-  
-  .zoom-lens {
+
+.zoom-lens {
     position: absolute;
     border: 3px solid #000;
     border-radius: 50%;
@@ -834,11 +848,11 @@ button[type="submit"]:hover {
     pointer-events: none;
     background-repeat: no-repeat;
     background-size: 200%;
-  }
+}
 
 @media (max-width: 768px) {
 
-    .modal-carrousel{
+    .modal-carrousel {
         display: none;
     }
 
@@ -973,11 +987,11 @@ button[type="submit"]:hover {
         font-size: 1.8rem;
     }
 
-    .estudio-align{
-        flex-direction:column-reverse;
+    .estudio-align {
+        flex-direction: column-reverse;
     }
 
-    .estudio-align img{
+    .estudio-align img {
         width: 100%;
     }
 }
