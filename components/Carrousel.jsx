@@ -101,13 +101,18 @@ const Carrousel = ({ images = [] }) => {
       </div>
 
       {isModalOpen && (
-        <div className="modal-carrousel" onClick={closeModal}>
-          <button className="close-modal" style={{ zIndex: 10 }} onClick={closeModal}>
-            <FaTimes />
-          </button>
-          <div className="modal-carrousel-content" onClick={(e) => e.stopPropagation()} style={{ overflow: 'auto' }}>
-            <img src={selectedImage} alt="Selected" className="modal-carrousel-image" />
-          </div>
+        // <div className="modal" onClick={closeModal}>
+        //   <button className="close-modal" style={{ zIndex: 10 }} onClick={closeModal}>
+        //     <FaTimes />
+        //   </button>
+        //   <div onClick={(e) => e.stopPropagation()}>
+        //     <img className="modal-content" src={selectedImage} alt="Selected" />
+        //   </div>
+        // </div>
+
+        <div className="modal" onClick={closeModal}>
+          <span className="close" onClick={closeModal}>&times;</span>
+          <img className="modal-content" src={selectedImage} alt="Imagen en pantalla completa" onClick={(e) => e.stopPropagation()} />
         </div>
       )}
     </div>
