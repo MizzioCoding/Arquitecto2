@@ -12,6 +12,7 @@ import Comercial from '../components/Comercial';
 import Reformas from '../components/Reformas';
 import { FaWhatsapp } from 'react-icons/fa'; // Importa el ícono de WhatsApp
 import Estudio from '../components/Estudio';
+import Thanks from '../components/Thanks';
 
 function App() {
 
@@ -39,7 +40,8 @@ function App() {
           <Route path="/comercial" element={<Projects titulo={"Comercial"} />} />
           <Route path="/reformas" element={<Projects titulo={"Reformas"} />} />
           <Route path="/contacto" element={<Contacto />} />
-          <Route path="/estudio" element={<Estudio />} /> {/* Ruta corregida */}
+          <Route path="/estudio" element={<Estudio />} />
+          <Route path="/thanks" element={<Thanks />} />
         </Routes>
       </div>
       <Footer />

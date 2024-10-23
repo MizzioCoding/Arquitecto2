@@ -817,9 +817,12 @@ button[type="submit"]:hover {
 
 .modal-carrousel-content {
     position: relative;
-    overflow: hidden; /* Evitar scroll dentro del modal */
-    max-width: 90%; /* Limitar el ancho del contenido del modal */
-    max-height: 90%; /* Limitar la altura del contenido del modal */
+    overflow: hidden;
+    /* Evitar scroll dentro del modal */
+    max-width: 90%;
+    /* Limitar el ancho del contenido del modal */
+    max-height: 90%;
+    /* Limitar la altura del contenido del modal */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -850,7 +853,8 @@ button[type="submit"]:hover {
     height: auto;
     margin: auto;
     display: block;
-    object-fit: contain; /* Asegura que la imagen se ajuste al contenedor sin recortarse */
+    object-fit: contain;
+    /* Asegura que la imagen se ajuste al contenedor sin recortarse */
 }
 
 .zoom-lens {
@@ -862,6 +866,27 @@ button[type="submit"]:hover {
     pointer-events: none;
     background-repeat: no-repeat;
     background-size: 200%;
+}
+
+.spinner {
+    border: 4px solid rgba(255, 255, 255, 0.3);
+    border-left-color: #fff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    animation: spin 1s linear infinite;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @media (max-width: 768px) {
