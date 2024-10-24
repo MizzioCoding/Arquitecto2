@@ -55,7 +55,7 @@ const Projects = ({ titulo }) => {
 
   return (
     <div className="projects">
-      <h1 className="tituloProyecto">{titulo}</h1>
+      <h1 className="tituloProyecto">{titulo==="Viviendas" ? "Viviendas e interiorismo" : titulo}</h1>
 
       {/* Mostrar el SkeletonCarrousel mientras las imágenes están cargando */}
       {isLoading ? (
