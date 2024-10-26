@@ -98,7 +98,7 @@ const LazyImage = ({ src, alt, text, onClick }) => {
   });
 
 
-  console.log("eeeeeeeeeeeeeeeeeeeeeee2");
+  console.log("eeeeeeeedsdsdasd");
 
   return (
     <div className="gallery-item" onClick={onClick} style={{ cursor: 'pointer' }} ref={ref}>
