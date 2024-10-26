@@ -28,19 +28,25 @@ jobs:
       - name: Copy .htaccess to dist folder
         run: cp .htaccess dist/.htaccess
 
-      - name: Checkout builded branch
-        run: git checkout builded
-
-      - name: Copy dist files from main branch to builded branch
-        run: |
-          git checkout main -- dist  # Trae la carpeta dist desde la rama main a la rama actual (builded)
-          cp -r dist/* .  # Copia el contenido de dist a la raíz de la rama builded
-          rm -rf dist  # Limpia la carpeta dist de la raíz de builded si no es necesaria
-
-      - name: Commit and push changes to builded branch
+      - name: Set up worktree for builded branch
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
+          git fetch origin builded  # Asegúrate de que la rama builded esté disponible
+          git worktree add builded-temp builded  # Crea un worktree temporal para la rama builded
+
+      - name: Copy dist content to builded branch worktree
+        run: |
+          cp -r dist/* builded-temp/  # Copia el contenido de dist al worktree de builded
+          cd builded-temp
           git add -A
           git commit -m "Deploy build to builded branch" || echo "No changes to commit"
+
+      - name: Push changes to builded branch
+        run: |
+          cd builded-temp
           git push origin builded || echo "Nothing to push, branch is up to date"
+
+      - name: Clean up worktree
+        run: |
+          git worktree remove builded-temp  # Elimina el worktree temporal
