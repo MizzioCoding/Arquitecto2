@@ -28,13 +28,14 @@ jobs:
       - name: Copy .htaccess to dist folder
         run: cp .htaccess dist/.htaccess
 
-      - name: Switch to builded branch
+      - name: Checkout builded branch
         run: git checkout builded
 
-      - name: Copy built files to builded branch
+      - name: Copy dist files from main branch to builded branch
         run: |
-          rm -rf *  # Borra todo el contenido en la rama "builded"
-          cp -r ../dist/* .  # Copia los archivos generados en "dist" a la raíz de la rama "builded"
+          git checkout main -- dist  # Trae la carpeta dist desde la rama main a la rama actual (builded)
+          cp -r dist/* .  # Copia el contenido de dist a la raíz de la rama builded
+          rm -rf dist  # Limpia la carpeta dist de la raíz de builded si no es necesaria
 
       - name: Commit and push changes to builded branch
         run: |
