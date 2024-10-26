@@ -28,13 +28,13 @@ const Contacto = () => {
         email: '',
         mensaje: ''
       });
-    }, 10000); // Simular un retraso de 10 segundos
+    }, 30000); // Simular un retraso de 10 segundos
   };
 
   return (
     <div className="contact-form">
       <h2>Contacto</h2>
-      <form action="https://formsubmit.co/aguschizzini@gmail.com" method="POST" onSubmit={handleSubmit}>
+      <form action="https://formsubmit.co/ezequielschreiber@gmail.com" method="POST" onSubmit={handleSubmit}>
         <input type="hidden" name="_subject" value="Nueva consulta!"></input>
         <input type="hidden" name="_captcha" value="false"></input>
         <input type="hidden" name="_template" value="table"></input>
