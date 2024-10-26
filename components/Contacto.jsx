@@ -38,7 +38,7 @@ const Contacto = () => {
         <input type="hidden" name="_subject" value="Nueva consulta!"></input>
         <input type="hidden" name="_captcha" value="false"></input>
         <input type="hidden" name="_template" value="table"></input>
-        <input type="hidden" name="_next" value="http://localhost:5173/thanks"></input>
+        <input type="hidden" name="_next" value="https://estudioschreiber.ar/thanks"></input>
         <input type="text" name="_honey" style={{display:'none'}}></input>
         <div className="form-group">
           <label htmlFor="nombre">Nombre</label>
