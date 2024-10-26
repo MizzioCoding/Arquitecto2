@@ -1,4 +1,4 @@
-name: Build and Deploy to Builded
+name: Build and Deploy to Separate Repo
 
 on:
   push:
@@ -10,15 +10,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Check out the repository
+      - name: Check out the source repository
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0  # Necesario para hacer push a otra rama
+          fetch-depth: 0  # Necesario para hacer push a otro repositorio
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'  # Especifica la versión de Node.js (si usas Node)
+          node-version: '20.9.0'  # Especifica la versión de Node.js 20.9.0
 
       - name: Install dependencies
         run: npm install  # Cambia esto según tu gestor de paquetes
@@ -26,12 +26,21 @@ jobs:
       - name: Build project
         run: npm run build  # Cambia esto según el script de build de tu proyecto
 
-      - name: Deploy to Builded
+      - name: Clone target repository
         run: |
-          git config --global user.email "actions@github.com"
-          git config --global user.name "GitHub Actions"
-          git checkout -b builded
-          git add -f dist/  # Asegura que la carpeta generada sea rastreada
-          git commit -m "Builded" || echo "No changes to commit"
-          git push origin builded || echo "Nothing to push, branch is up to date"
+          git clone https://github.com/MizzioCoding/Arquitecto2-Builded.git builded-repo
+          cd builded-repo
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
 
+      - name: Copy built files to target repository
+        run: |
+          rm -rf builded-repo/*
+          cp -r dist/* builded-repo/
+          
+      - name: Commit and push changes to target repository
+        run: |
+          cd builded-repo
+          git add .
+          git commit -m "Builded from main branch" || echo "No changes to commit"
+          git push origin main || echo "Nothing to push, branch is up to date"
