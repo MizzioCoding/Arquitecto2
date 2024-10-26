@@ -97,6 +97,9 @@ const LazyImage = ({ src, alt, text, onClick }) => {
     threshold: 0.1
   });
 
+
+  console.log("Nuevo cambiooooooooooooooooooooooooooooooo");
+
   return (
     <div className="gallery-item" onClick={onClick} style={{ cursor: 'pointer' }} ref={ref}>
       {inView ? <img src={src} alt={alt} /> : <div className="placeholder" />}
