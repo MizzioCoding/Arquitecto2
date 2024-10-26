@@ -17,7 +17,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.9.0'  # Especifica la versión de Node.js (si usas Node)
+          node-version: '20.9.0'  # Especifica la versión de Node.js
 
       - name: Install dependencies
         run: npm install  # Cambia esto según tu gestor de paquetes
@@ -28,11 +28,18 @@ jobs:
       - name: Copy .htaccess to dist folder
         run: cp .htaccess dist/.htaccess
 
-      - name: Deploy to main
+      - name: Switch to builded branch
+        run: git checkout builded
+
+      - name: Copy built files to builded branch
+        run: |
+          rm -rf *  # Borra todo el contenido en la rama "builded"
+          cp -r ../dist/* .  # Copia los archivos generados en "dist" a la raíz de la rama "builded"
+
+      - name: Commit and push changes to builded branch
         run: |
           git config --global user.email "actions@github.com"
           git config --global user.name "GitHub Actions"
-          git add -f dist/  # Asegura que la carpeta generada sea rastreada
-          git commit -m "Builded" || echo "No changes to commit"
-          git push origin main || echo "Nothing to push, branch is up to date"
-
+          git add -A
+          git commit -m "Deploy build to builded branch" || echo "No changes to commit"
+          git push origin builded || echo "Nothing to push, branch is up to date"
