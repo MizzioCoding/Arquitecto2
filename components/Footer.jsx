@@ -20,6 +20,7 @@ const Footer = () => {
       <div className="footer-copy">
         <small>&copy; {year} Mizzio Coding all rights reserved</small>
       </div>
+      <script dangerouslySetInnerHTML={{ __html: `gtag('event', 'conversion', {'send_to': 'AW-16754927570/JrJUCPG-y-YZENLPr7U-'});` }} />
     </footer>
   );
 };
